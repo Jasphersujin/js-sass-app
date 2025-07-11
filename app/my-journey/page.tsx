@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { getUserCompanions, getUserSessions } from "@/lib/actions/companion.actions"
-// import { getBookmarkedCompanions } from "@/lib/actions/companion.actions" 
+import { getBookmarkedCompanions } from "@/lib/actions/companion.actions" 
 import { currentUser } from "@clerk/nextjs/server"
 import Image from "next/image"
 import { redirect } from "next/navigation"
@@ -18,8 +18,7 @@ const Profile = async () => {
 
   const companions = await getUserCompanions(user.id);
   const sessionHistory = await getUserSessions(user.id);
-  // const bookMarkcompanions = await getBookmarkedCompanions(user.id)
-
+  const getMyBookmarkedCompanions = await getBookmarkedCompanions(user.id);
   return (
     <main className="min-lg:w-3/4">
       <section className="flex justify-between gap-4 max-sm:flex-col items-center">
@@ -54,17 +53,17 @@ const Profile = async () => {
         </div>
       </section>
         <Accordion type="multiple">
-          {/* <AccordionItem value="bookmark">
-            <AccordionTrigger className="font-bold text-2xl">Bookmarked {`(${bookMarkcompanions.length})`}</AccordionTrigger>
-            {bookMarkcompanions.length >= 1? 
+          <AccordionItem value="bookmark">
+            <AccordionTrigger className="font-bold text-2xl">Bookmarked {`(${getMyBookmarkedCompanions.length})`}</AccordionTrigger>
+            {getMyBookmarkedCompanions.length >= 1? 
               <AccordionContent>
-                 <CompanionsList title="Bookmarked Companions" companions={bookMarkcompanions}/>
+                 <CompanionsList title="Bookmarked Companions" companions={getMyBookmarkedCompanions}/>
               </AccordionContent>: 
               <AccordionContent>
                  <p className="font-bold">No Bookmarks yet</p>
               </AccordionContent>
             }
-          </AccordionItem> */}
+          </AccordionItem>
 
           <AccordionItem value="recent">
             <AccordionTrigger className="font-bold text-2xl">Recent Sessions</AccordionTrigger>
