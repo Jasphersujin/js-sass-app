@@ -4,6 +4,8 @@ import CTA from '@/components/CTA'
 import { getAllCompanions, getRecentSessions } from '@/lib/actions/companion.actions'
 import { getSubjectColor } from '@/lib/utils'
 import { auth } from "@clerk/nextjs/server";
+
+
 import React from 'react'
 
 const Page = async () => {
@@ -20,7 +22,7 @@ const Page = async () => {
   //   bookmarked: bookmarkedIds.includes(comp.id),
   // }));
 
-  const recentSessionCompanions = await getRecentSessions(10);
+  const recentSessionCompanions = await getRecentSessions(userId);
 
   return (
     <main>
@@ -36,10 +38,15 @@ const Page = async () => {
       </section>
 
       <section className='home-section'>
-        <CompanionsList
+        {/* <CompanionsList
           title="Recently completed sessions"
           companions={recentSessionCompanions}
           classNames="w-2/3 max-lg:w-full"
+        /> */}
+        <CompanionsList
+         title="Recently completed Sessions"
+         companions={recentSessionCompanions}
+         classNames='w-2/3 max-lg:w-full'
         />
         <CTA />
       </section>

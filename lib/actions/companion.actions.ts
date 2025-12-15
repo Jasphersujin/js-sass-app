@@ -24,7 +24,7 @@ export const getAllCompanions = async({ limit = 10, page = 1, subject, topic} : 
 
     if(subject && topic) {
         query = query.ilike('subject',`%${subject}%`)
-        .or(`'topic.ilike.%${topic}%, name.ilike.%${topic}%`)
+        .or(`topic.ilike.%${topic}%, name.ilike.%${topic}%`)
     }  else if(subject){
         query = query.ilike('subject', `%${subject}%`);
     }else if(topic){
@@ -95,12 +95,13 @@ export const addToSessionHistory = async (companionId: string) => {
 };
 
 
-export const getRecentSessions = async (limit = 10) => {
+export const getRecentSessions = async (userId: string, limit = 10) => {
     const supabase = createSupabaseClient();
 
     const {data, error} = await supabase
     .from('session_history')
     .select(`companions:companion_id(*)`)
+    .eq('user_id', userId)
     .order('created_at', {ascending: false})
     .limit(limit)
     
@@ -204,103 +205,10 @@ export const getBookmarkedCompanions = async (userId: string) => {
     const supabase = await createSupabaseClient();
     const {data, error} = await supabase
         .from('bookmarks')
-        .select(`companions: companion_id(*)`)
+        .select(`companions:companion_id(*)`)
         .eq('user_id', userId)
 
     if(error) throw new Error(error.message);
 
     return data.map(({companions}) => companions)
 }
-
-// export const addBookmark = async (companionId: string, path : string) => {
-//     const {userId} = await auth();
-//     if(!userId) return;
-//     const supabase = createSupabaseClient();
-//     const {data, error} = await supabase
-//         .from('bookmarks')
-//         .insert({
-//             companion_id: companionId,
-//             user_id: userId,
-//         });
-        
-//         if(error) {
-//             throw new Error(error.message)
-//         }
-//         revalidatePath(path)
-//         return data;   
-// }
-// export const addingBookmark = async () => {
-//     const { userId } = await auth();
-//     console.log(userId);
-// }
-// addingBookmark()
-
-// export const addBookmark = async (companionId: string, path: string) => {
-//   const { userId } = await auth();
-//   if (!userId) return;
-
-//   const supabase = createSupabaseClient();
-
-//   // ✅ Step 1: Check if this bookmark already exists
-//   const { data: existing, error: checkError } = await supabase
-//     .from("bookmarks")
-//     .select("*")
-//     .eq("user_id", userId)
-//     .eq("companion_id", companionId)
-//     .maybeSingle(); // Use maybeSingle to avoid throwing if no result
-
-//   if (checkError) {
-//     throw new Error(checkError.message);
-//   }
-
-//   if (existing) {
-//     console.log("✅Bookmark already exists. Skipping insert.");
-//     return existing;
-//   }
-
-//   // ✅ Step 2: If not exists, insert it
-//   const { data, error } = await supabase.from("bookmarks").insert({
-//     companion_id: companionId,
-//     user_id: userId,
-//   });
-
-//   if (error) {
-//     throw new Error(error.message);
-//   }
-
-//   revalidatePath(path);
-//   return data;
-// };
-
-
-// export const removeBookmark = async (companionId: string, path: string) => {
-//     const {userId} = await auth();
-//     if(!userId) return;
-//     const supabase = createSupabaseClient();
-//     const {data, error} = await supabase
-//         .from('bookmarks')
-//         .delete()
-//         .eq("companion_id", companionId)
-//         .eq("user_id", userId)
-    
-//     if(error){
-//         throw new Error(error.message)
-//     };
-//     revalidatePath(path);
-//     return data;
-// }
-
-// export const getBookmarkedCompanions = async (userId: string) => {
-//     const supabase = await createSupabaseClient();
-//     const {data, error} = await supabase
-//         .from('bookmarks')
-//         .select(`companions:companion_id(*)`)
-//         .eq('user_id', userId)
-
-//     if(error){
-//         throw new Error (error.message)
-//     };
-    
-//     return data.map(({companions}) => companions)
-// }
-
