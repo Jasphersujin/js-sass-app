@@ -19,7 +19,7 @@ bun dev
 Below are some screenshots showcasing the main features and UI of the application.
 
 ### Home Page
-![Home Page](public/screenshots/AI SAAS Home page.png)
+![Home Page](public/screenshots/Home.png)
 
 ### Companions Page
 ![Companions Page](public/screenshots/companions.png)
