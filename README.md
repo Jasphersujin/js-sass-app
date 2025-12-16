@@ -14,6 +14,25 @@ pnpm dev
 bun dev
 ```
 
+## Screenshots
+
+Below are some screenshots showcasing the main features and UI of the application.
+
+### Home Page
+![Home Page](public/screenshots/AI SAAS Home page.png)
+
+### Companions Page
+![Companions Page](public/screenshots/companions.png)
+
+### Companion Detail
+![Companion Learning View](public/screenshots/Learning.png)
+
+### Create New Companion
+![User Profile](public/screenshots/userprofile.png)
+
+### Subscription Page
+![Subscription Page](public/screenshots/subscription.png)
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
