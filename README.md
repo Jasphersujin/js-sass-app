@@ -24,10 +24,10 @@ Below are some screenshots showcasing the main features and UI of the applicatio
 ### Companions Page
 ![Companions Page](public/screenshots/companions.png)
 
-### Companion Detail
+### Companion Learning View
 ![Companion Learning View](public/screenshots/Learning.png)
 
-### Create New Companion
+### User Profile
 ![User Profile](public/screenshots/userprofile.png)
 
 ### Subscription Page
