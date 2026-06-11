@@ -77,14 +77,19 @@ A modern Learning Management System (LMS) built with Next.js, Clerk Authenticati
 ## Screenshots
 
 ### Home Page
+![Home Page](public/screenshots/Home.png)
 
 ### Companions Page
+![Companions Page](public/screenshots/companions.png)
 
-### Companion Learning View
+### Companion Learner View
+![Companion Learning View](public/screenshots/Learning.png)
 
 ### User Profile
+![User Profile](public/screenshots/userprofile.png)
 
 ### Subscription Page
+![Subscription Page](public/screenshots/subscription.png)
 
 ---
 
